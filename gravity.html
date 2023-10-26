@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="object"></div>
+    <div id="floor"></div>
+    <script>
+      // set html height
+      document.documentElement.style.height = '100%';
+
+      const { style: bodyStyle } = document.body;
+      bodyStyle.height = '100%';
+      bodyStyle.position = 'relative';
+      bodyStyle.display = 'flex';
+      bodyStyle.justifyContent = 'center';
+      bodyStyle.alignContent = 'center';
+      bodyStyle.background = 'black';
+      bodyStyle.margin = 0;
+
+      const floor = document.getElementById('floor');
+      const { style: floorStyle } = floor;
+      floorStyle.position = 'absolute';
+      floorStyle.bottom = 0;
+      floorStyle.width = '100%';
+      floorStyle.height = '300px';
+      floorStyle.background = 'gray';
+
+      const ball = document.getElementById('object');
+      const { style: ballStyle } = object;
+      ballStyle.background = 'white';
+      ballStyle.borderRadius = '100%';
+      ballStyle.width = '50px';
+      ballStyle.height = '50px';
+
+      const horizon =
+        window.innerHeight - Number(floorStyle.height.split('px')[0]);
+      console.log(horizon);
+    </script>
+    <script>
+      const g = 9.86;
+      const t = 0.01;
+      let position = 0;
+      let s = 0;
+
+      const intervalId = setInterval(() => {
+        s += t;
+        position = Math.floor(position + g * s);
+
+        object.style.marginTop = position + 'px';
+        if (position + 50 > horizon) clearInterval(intervalId);
+      }, t);
+    </script>
+  </body>
+</html>
